@@ -7,12 +7,10 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 class NewsRemoteDataSourceImpl(
-    private val newsAPIService: NewsAPIService,
-    private val country: String,
-    private val page: Int
+    private val newsAPIService: NewsAPIService
 ): NewsRemoteDataSource {
     @GET("v2/top-headlines")
-    override suspend fun getTopHeadlines(): Response<APIResponse> {
+    override suspend fun getTopHeadlines(country: String, page: Int): Response<APIResponse> {
         return newsAPIService.getTopHeadlines(country, page)
     }
 }
