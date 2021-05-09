@@ -30,7 +30,9 @@ class NewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fragmentNewsBinding = FragmentNewsBinding.bind(view)
         viewModel = (activity as MainActivity).viewModel
+        newsAdapter = (activity as MainActivity).newsAdapter
         initRecyclerView()
         viewNewsList()
     }
@@ -61,7 +63,7 @@ class NewsFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        newsAdapter = NewsAdapter()
+//        newsAdapter = NewsAdapter()
         fragmentNewsBinding.rvNews.apply {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
@@ -75,7 +77,7 @@ class NewsFragment : Fragment() {
     }
 
     private fun hideProgressBar() {
-        fragmentNewsBinding.progressBar.visibility = View.INVISIBLE
+        fragmentNewsBinding.progressBar.visibility = View.GONE
     }
 
 }
