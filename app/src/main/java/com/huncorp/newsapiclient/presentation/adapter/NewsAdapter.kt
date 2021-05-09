@@ -9,9 +9,9 @@ import com.bumptech.glide.Glide
 import com.huncorp.newsapiclient.data.model.Article
 import com.huncorp.newsapiclient.databinding.NewsListItemBinding
 
-class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
-    private val callback = object: DiffUtil.ItemCallback<Article>() {
+    private val callback = object : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
             return oldItem.url == newItem.url
         }
@@ -40,17 +40,27 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     inner class NewsViewHolder(
         private val binding: NewsListItemBinding
-        ): RecyclerView.ViewHolder(binding.root) {
-            fun bind(article: Article) {
-                binding.tvTitle.text = article.title
-                binding.tvDescription.text = article.description
-                binding.tvPublishedAt.text = article.publishedAt
-                binding.tvSource.text = article.source.name
-                Glide.with(binding.ivArticleImage.context)
-                    .load(article.urlToImage)
-                    .into(binding.ivArticleImage)
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(article: Article) {
+            binding.tvTitle.text = article.title
+            binding.tvDescription.text = article.description
+            binding.tvPublishedAt.text = article.publishedAt
+            binding.tvSource.text = article.source.name
+            Glide.with(binding.ivArticleImage.context)
+                .load(article.urlToImage)
+                .into(binding.ivArticleImage)
+            binding.root.setOnClickListener {
+                onItemClickListener?.let {
+                    it(article)
+                }
             }
         }
+    }
 
+    private var onItemClickListener: ((Article) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Article) -> Unit) {
+        onItemClickListener = listener
+    }
 }
 
