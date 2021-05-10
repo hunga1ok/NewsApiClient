@@ -2,6 +2,7 @@ package com.huncorp.newsapiclient.presentation.di
 
 import android.app.Application
 import com.huncorp.newsapiclient.domain.usecase.GetNewsHeadlinesUseCase
+import com.huncorp.newsapiclient.domain.usecase.GetSavedNewsUseCase
 import com.huncorp.newsapiclient.domain.usecase.GetSearchedNewsUseCase
 import com.huncorp.newsapiclient.domain.usecase.SaveNewsUseCase
 import com.huncorp.newsapiclient.presentation.viewmodel.NewsViewModelFactory
@@ -20,13 +21,15 @@ class FactoryModule {
         application: Application,
         getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
         getSearchedNewsUseCase: GetSearchedNewsUseCase,
-        saveNewsUseCase: SaveNewsUseCase
+        saveNewsUseCase: SaveNewsUseCase,
+        getSavedNewsUseCase: GetSavedNewsUseCase
     ): NewsViewModelFactory {
         return NewsViewModelFactory(
             application,
             getNewsHeadlinesUseCase,
             getSearchedNewsUseCase,
-            saveNewsUseCase
+            saveNewsUseCase,
+            getSavedNewsUseCase
 
         )
     }
