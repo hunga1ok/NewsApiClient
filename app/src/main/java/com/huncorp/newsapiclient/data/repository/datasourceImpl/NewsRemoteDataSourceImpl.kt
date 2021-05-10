@@ -10,7 +10,20 @@ class NewsRemoteDataSourceImpl(
     private val newsAPIService: NewsAPIService
 ): NewsRemoteDataSource {
     @GET("v2/top-headlines")
-    override suspend fun getTopHeadlines(country: String, page: Int): Response<APIResponse> {
+    override suspend fun getTopHeadlines(
+        country: String,
+        page: Int
+    ): Response<APIResponse> {
         return newsAPIService.getTopHeadlines(country, page)
     }
+
+    @GET("v2/top-headlines")
+    override suspend fun getSearchedHeadlines(
+        country: String,
+        searchQuery: String,
+        page: Int
+    ): Response<APIResponse> {
+        return newsAPIService.getSearchedHeadlines(country, searchQuery, page)
+    }
+
 }
