@@ -1,10 +1,7 @@
 package com.huncorp.newsapiclient.presentation.di
 
 import com.huncorp.newsapiclient.domain.repository.NewsRepository
-import com.huncorp.newsapiclient.domain.usecase.GetNewsHeadlinesUseCase
-import com.huncorp.newsapiclient.domain.usecase.GetSavedNewsUseCase
-import com.huncorp.newsapiclient.domain.usecase.GetSearchedNewsUseCase
-import com.huncorp.newsapiclient.domain.usecase.SaveNewsUseCase
+import com.huncorp.newsapiclient.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,5 +41,13 @@ class UseCaseModule {
         newsRepository: NewsRepository
     ): GetSavedNewsUseCase {
         return GetSavedNewsUseCase(newsRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideDeleteSavedNewsUseCase(
+        newsRepository: NewsRepository
+    ): DeleteSavedNewsUseCase {
+        return DeleteSavedNewsUseCase(newsRepository)
     }
 }
